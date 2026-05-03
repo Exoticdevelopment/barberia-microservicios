@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<h2>Lista de Citas</h2>
+<div class="acciones">
+  <a href="/nuevo" class="btn">+ Nueva cita</a>
+  <a href="/exportar" class="btn">Exportar CSV</a>
+  <form action="/importar" method="post" enctype="multipart/form-data" style="display:flex;gap:0.5rem">
+    <input type="file" name="archivo" accept=".csv" style="color:var(--muted);font-size:13px">
+    <button type="submit">Importar</button>
+  </form>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Cliente</th>
+      <th>Barbero</th>
+      <th>Servicio</th>
+      <th>Fecha</th>
+      <th>Hora</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in citas %}
+    <tr>
+      <td>{{ c.cliente }}</td>
+      <td>{{ c.barbero }}</td>
+      <td>{{ c.servicio }}</td>
+      <td>{{ c.fecha }}</td>
+      <td>{{ c.hora }}</td>
+      <td style="display:flex;gap:0.5rem">
+        <a href="/editar/{{ c.id }}" class="btn">Editar</a>
+        <a href="/eliminar/{{ c.id }}" class="btn btn-danger">Eliminar</a>
+      </td>
+    </tr>
+    {% endfor %}
+    {% if not citas %}
+    <tr><td colspan="6" style="color:var(--muted);text-align:center">Sin citas registradas</td></tr>
+    {% endif %}
+  </tbody>
+</table>
+{% endblock %}
+

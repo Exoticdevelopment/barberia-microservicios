@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<h2>{{ 'Editar' if venta else 'Nueva' }} Venta</h2>
+<form class="form-card" method="post">
+  <label>Servicio</label>
+  <input type="text" name="servicio" value="{{ venta.servicio if venta else '' }}" required>
+  <label>Monto</label>
+  <input type="number" name="monto" step="0.01" value="{{ venta.monto if venta else '' }}">
+  <label>Método de pago</label>
+  <select name="metodo_pago">
+    <option value="Efectivo" {{ 'selected' if venta and venta.metodo_pago == 'Efectivo' }}>Efectivo</option>
+    <option value="Tarjeta" {{ 'selected' if venta and venta.metodo_pago == 'Tarjeta' }}>Tarjeta</option>
+    <option value="Transferencia" {{ 'selected' if venta and venta.metodo_pago == 'Transferencia' }}>Transferencia</option>
+    <option value="Nequi" {{ 'selected' if venta and venta.metodo_pago == 'Nequi' }}>Nequi</option>
+  </select>
+  <label>Fecha</label>
+  <input type="date" name="fecha" value="{{ venta.fecha if venta else '' }}">
+  <div class="form-actions">
+    <button type="submit">Guardar</button>
+    <a href="/" class="btn">Cancelar</a>
+  </div>
+</form>
+{% endblock %}
+

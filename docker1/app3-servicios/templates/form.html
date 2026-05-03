@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<h2>{{ 'Editar' if servicio else 'Nuevo' }} Servicio</h2>
+<form class="form-card" method="post">
+  <label>Nombre</label>
+  <input type="text" name="nombre" value="{{ servicio.nombre if servicio else '' }}" required>
+  <label>Descripción</label>
+  <input type="text" name="descripcion" value="{{ servicio.descripcion if servicio else '' }}">
+  <label>Precio</label>
+  <input type="number" name="precio" step="0.01" value="{{ servicio.precio if servicio else '' }}">
+  <div class="form-actions">
+    <button type="submit">Guardar</button>
+    <a href="/" class="btn">Cancelar</a>
+  </div>
+</form>
+{% endblock %}
+

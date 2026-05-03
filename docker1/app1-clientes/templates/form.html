@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<h2>{{ 'Editar' if cliente else 'Nuevo' }} Cliente</h2>
+<form class="form-card" method="post">
+  <label>Nombre</label>
+  <input type="text" name="nombre" value="{{ cliente.nombre if cliente else '' }}" required>
+  <label>Teléfono</label>
+  <input type="tel" name="telefono" value="{{ cliente.telefono if cliente else '' }}">
+  <label>Última visita</label>
+  <input type="date" name="ultima_visita" value="{{ cliente.ultima_visita if cliente else '' }}">
+  <div class="form-actions">
+    <button type="submit">Guardar</button>
+    <a href="/" class="btn">Cancelar</a>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  app4-barberos:
+    build: ./app4-barberos
+    ports:
+      - "5004:5004"
+    networks:
+      - barberia-net
+    restart: unless-stopped
+
+  app5-productos:
+    build: ./app5-productos
+    ports:
+      - "5005:5005"
+    networks:
+      - barberia-net
+    restart: unless-stopped
+
+  app6-ventas:
+    build: ./app6-ventas
+    ports:
+      - "5006:5006"
+    networks:
+      - barberia-net
+    restart: unless-stopped
+
+networks:
+  barberia-net:
+    external: true

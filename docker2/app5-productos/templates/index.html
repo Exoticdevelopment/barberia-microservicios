@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<h2>Inventario de Productos</h2>
+<div class="acciones">
+  <a href="/nuevo" class="btn">+ Nuevo producto</a>
+  <a href="/exportar" class="btn">Exportar CSV</a>
+  <form action="/importar" method="post" enctype="multipart/form-data" style="display:flex;gap:0.5rem">
+    <input type="file" name="archivo" accept=".csv" style="color:var(--muted);font-size:13px">
+    <button type="submit">Importar</button>
+  </form>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Stock</th>
+      <th>Precio</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in productos %}
+    <tr>
+      <td>{{ p.nombre }}</td>
+      <td>
+        <span style="color: {{ 'var(--danger)' if p.stock < 5 else 'var(--text)' }}">
+          {{ p.stock }} {{ '⚠ bajo stock' if p.stock < 5 else '' }}
+        </span>
+      </td>
+      <td>${{ "%.2f"|format(p.precio) }}</td>
+      <td style="display:flex;gap:0.5rem">
+        <a href="/editar/{{ p.id }}" class="btn">Editar</a>
+        <a href="/eliminar/{{ p.id }}" class="btn btn-danger">Eliminar</a>
+      </td>
+    </tr>
+    {% endfor %}
+    {% if not productos %}
+    <tr><td colspan="4" style="color:var(--muted);text-align:center">Sin productos registrados</td></tr>
+    {% endif %}
+  </tbody>
+</table>
+{% endblock %}

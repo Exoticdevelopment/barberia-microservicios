@@ -1,0 +1,66 @@
+version: '3.8'
+
+networks:
+  barberia-net:
+    driver: bridge
+
+services:
+
+  # ── DOCKER 1 ──────────────────────
+  app1-clientes:
+    build: ./docker1/app1-clientes
+    ports:
+      - "5001:5001"
+    networks:
+      - barberia-net
+    restart: unless-stopped
+
+  app2-citas:
+    build: ./docker1/app2-citas
+    ports:
+      - "5002:5002"
+    networks:
+      - barberia-net
+    restart: unless-stopped
+
+  app3-servicios:
+    build: ./docker1/app3-servicios
+    ports:
+      - "5003:5003"
+    networks:
+      - barberia-net
+    restart: unless-stopped
+
+  # ── DOCKER 2 ──────────────────────
+  app4-barberos:
+    build: ./docker2/app4-barberos
+    ports:
+      - "5004:5004"
+    networks:
+      - barberia-net
+    restart: unless-stopped
+
+  app5-productos:
+    build: ./docker2/app5-productos
+    ports:
+      - "5005:5005"
+    networks:
+      - barberia-net
+    restart: unless-stopped
+
+  app6-ventas:
+    build: ./docker2/app6-ventas
+    ports:
+      - "5006:5006"
+    networks:
+      - barberia-net
+    restart: unless-stopped
+
+  # ── GESTIÓN CENTRAL ───────────────
+  gestion:
+    build: ./gestion
+    ports:
+      - "8000:8000"
+    networks:
+      - barberia-net
+    restart: unless-stopped

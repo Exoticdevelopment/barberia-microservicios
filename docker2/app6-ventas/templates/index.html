@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<h2>Registro de Ventas</h2>
+<div class="acciones">
+  <a href="/nuevo" class="btn">+ Nueva venta</a>
+  <a href="/exportar" class="btn">Exportar CSV</a>
+  <form action="/importar" method="post" enctype="multipart/form-data" style="display:flex;gap:0.5rem">
+    <input type="file" name="archivo" accept=".csv" style="color:var(--muted);font-size:13px">
+    <button type="submit">Importar</button>
+  </form>
+</div>
+
+<div style="background:var(--surface);border-radius:6px;padding:1rem 1.5rem;margin-bottom:1.2rem;display:inline-block">
+  <span style="color:var(--muted);font-size:13px">Total recaudado</span>
+  <p style="color:var(--accent);font-size:24px;font-weight:bold;margin:0">${{ "%.2f"|format(total) }}</p>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Servicio</th>
+      <th>Monto</th>
+      <th>Método de pago</th>
+      <th>Fecha</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for v in ventas %}
+    <tr>
+      <td>{{ v.servicio }}</td>
+      <td>${{ "%.2f"|format(v.monto) }}</td>
+      <td>{{ v.metodo_pago }}</td>
+      <td>{{ v.fecha }}</td>
+      <td style="display:flex;gap:0.5rem">
+        <a href="/editar/{{ v.id }}" class="btn">Editar</a>
+        <a href="/eliminar/{{ v.id }}" class="btn btn-danger">Eliminar</a>
+      </td>
+    </tr>
+    {% endfor %}
+    {% if not ventas %}
+    <tr><td colspan="5" style="color:var(--muted);text-align:center">Sin ventas registradas</td></tr>
+    {% endif %}
+  </tbody>
+</table>
+{% endblock %}
+
+

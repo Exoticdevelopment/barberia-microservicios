@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<h2>Gestión de Barberos</h2>
+<div class="acciones">
+  <a href="/nuevo" class="btn">+ Nuevo barbero</a>
+  <a href="/exportar" class="btn">Exportar CSV</a>
+  <form action="/importar" method="post" enctype="multipart/form-data" style="display:flex;gap:0.5rem">
+    <input type="file" name="archivo" accept=".csv" style="color:var(--muted);font-size:13px">
+    <button type="submit">Importar</button>
+  </form>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Turno</th>
+      <th>Especialidad</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for b in barberos %}
+    <tr>
+      <td>{{ b.nombre }}</td>
+      <td>{{ b.turno }}</td>
+      <td>{{ b.especialidad }}</td>
+      <td style="display:flex;gap:0.5rem">
+        <a href="/editar/{{ b.id }}" class="btn">Editar</a>
+        <a href="/eliminar/{{ b.id }}" class="btn btn-danger">Eliminar</a>
+      </td>
+    </tr>
+    {% endfor %}
+    {% if not barberos %}
+    <tr><td colspan="4" style="color:var(--muted);text-align:center">Sin barberos registrados</td></tr>
+    {% endif %}
+  </tbody>
+</table>
+{% endblock %}

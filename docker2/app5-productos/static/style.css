@@ -1,0 +1,89 @@
+:root {
+  --bg: #1a1a1a;
+  --surface: #242424;
+  --accent: #c8a96e;
+  --text: #f0f0f0;
+  --muted: #888;
+  --danger: #c0392b;
+  --radius: 6px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { background: var(--bg); color: var(--text); font-family: sans-serif; font-size: 15px; }
+
+header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--accent);
+  padding: 0 2rem;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.header-inner { display: flex; align-items: center; gap: 1rem; width: 100%; }
+
+.logo { font-size: 18px; font-weight: bold; color: var(--accent); letter-spacing: 1px; }
+
+.modulo {
+  background: var(--accent);
+  color: #1a1a1a;
+  padding: 2px 10px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+main { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+
+h2 { color: var(--accent); margin-bottom: 1.2rem; font-size: 20px; }
+
+table { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: var(--radius); overflow: hidden; }
+
+th { background: #2e2e2e; color: var(--accent); padding: 10px 14px; text-align: left; font-size: 13px; }
+
+td { padding: 10px 14px; border-bottom: 1px solid #2e2e2e; color: var(--text); font-size: 14px; }
+
+tr:last-child td { border-bottom: none; }
+
+tr:hover td { background: #2a2a2a; }
+
+a.btn, button {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+a.btn:hover, button:hover { background: var(--accent); color: #1a1a1a; }
+
+a.btn-danger { border-color: var(--danger); color: var(--danger); }
+a.btn-danger:hover { background: var(--danger); color: white; }
+
+.acciones { display: flex; gap: 0.5rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+
+form.form-card { background: var(--surface); padding: 1.5rem; border-radius: var(--radius); max-width: 480px; }
+
+label { display: block; color: var(--muted); font-size: 13px; margin-bottom: 4px; margin-top: 1rem; }
+
+input[type=text], input[type=date], input[type=tel], input[type=number], select {
+  width: 100%;
+  padding: 8px 10px;
+  background: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 14px;
+}
+
+input:focus, select:focus { outline: none; border-color: var(--accent); }
+
+.form-actions { margin-top: 1.5rem; display: flex; gap: 0.8rem; }
+
+

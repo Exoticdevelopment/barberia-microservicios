@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<h2>{{ 'Editar' if cita else 'Nueva' }} Cita</h2>
+<form class="form-card" method="post">
+  <label>Cliente</label>
+  <input type="text" name="cliente" value="{{ cita.cliente if cita else '' }}" required>
+  <label>Barbero</label>
+  <input type="text" name="barbero" value="{{ cita.barbero if cita else '' }}" required>
+  <label>Servicio</label>
+  <input type="text" name="servicio" value="{{ cita.servicio if cita else '' }}">
+  <label>Fecha</label>
+  <input type="date" name="fecha" value="{{ cita.fecha if cita else '' }}">
+  <label>Hora</label>
+  <input type="time" name="hora" value="{{ cita.hora if cita else '' }}">
+  <div class="form-actions">
+    <button type="submit">Guardar</button>
+    <a href="/" class="btn">Cancelar</a>
+  </div>
+</form>
+{% endblock %}
+

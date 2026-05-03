@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<h2>{{ 'Editar' if barbero else 'Nuevo' }} Barbero</h2>
+<form class="form-card" method="post">
+  <label>Nombre</label>
+  <input type="text" name="nombre" value="{{ barbero.nombre if barbero else '' }}" required>
+  <label>Turno</label>
+  <select name="turno">
+    <option value="Mañana" {{ 'selected' if barbero and barbero.turno == 'Mañana' }}>Mañana</option>
+    <option value="Tarde" {{ 'selected' if barbero and barbero.turno == 'Tarde' }}>Tarde</option>
+    <option value="Noche" {{ 'selected' if barbero and barbero.turno == 'Noche' }}>Noche</option>
+  </select>
+  <label>Especialidad</label>
+  <input type="text" name="especialidad" value="{{ barbero.especialidad if barbero else '' }}">
+  <div class="form-actions">
+    <button type="submit">Guardar</button>
+    <a href="/" class="btn">Cancelar</a>
+  </div>
+</form>
+{% endblock %}
+
