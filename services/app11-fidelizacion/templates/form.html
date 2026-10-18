@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Editar' if item else 'Nuevo' }} Cliente{% endblock %}
+{% block content %}
+<h2>{{ 'Editar Cliente' if item else 'Nuevo Cliente' }}</h2>
+<form method="post" class="form-card">
+  <label>Cliente</label>
+  <input type="text" name="cliente" value="{{ item.cliente if item else '' }}" required>
+  <label>Puntos</label>
+  <input type="number" name="puntos" value="{{ item.puntos if item else '0' }}">
+  <label>Descuento</label>
+  <input type="text" name="descuento" placeholder="Ej: 10%" value="{{ item.descuento if item else '' }}">
+  <div class="form-actions">
+    <button type="submit">Guardar</button>
+    <a href="{{ url_for('index') }}" class="btn">Cancelar</a>
+  </div>
+</form>
+{% endblock %}
+

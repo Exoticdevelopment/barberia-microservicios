@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Proveedores{% endblock %}
+{% block content %}
+<div class="top-bar">
+  <h1>Proveedores</h1>
+  <a href="{{ url_for('nuevo') }}" class="btn">+ Nuevo</a>
+</div>
+<form method="post" action="{{ url_for('importar') }}" enctype="multipart/form-data" style="margin-bottom:1rem">
+  <input type="file" name="archivo" accept=".csv" style="color:var(--muted);font-size:13px">
+  <button type="submit" class="btn">Importar CSV</button>
+</form>
+<table>
+  <thead>
+    <tr><th>#</th><th>Nombre</th><th>Producto</th><th>Contacto</th><th>Acciones</th></tr>
+  </thead>
+  <tbody>
+    {% for i in items %}
+    <tr>
+      <td>{{ i.id }}</td>
+      <td>{{ i.nombre }}</td>
+      <td>{{ i.producto }}</td>
+      <td>{{ i.contacto }}</td>
+      <td><div class="actions">
+        <a href="{{ url_for('editar', id=i.id) }}" class="btn">Editar</a>
+        <a href="{{ url_for('eliminar', id=i.id) }}" class="btn btn-danger">Eliminar</a>
+      </div></td>
+    </tr>
+    {% else %}
+    <tr><td colspan="5" style="text-align:center;color:var(--muted)">Sin registros</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

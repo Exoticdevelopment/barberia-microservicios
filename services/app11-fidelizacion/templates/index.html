@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Fidelización{% endblock %}
+{% block content %}
+<div class="acciones">
+  <a href="{{ url_for('nuevo') }}" class="btn">+ Nuevo cliente</a>
+  <a href="{{ url_for('exportar') }}" class="btn">Exportar CSV</a>
+  <form method="post" action="{{ url_for('importar') }}" enctype="multipart/form-data" style="display:flex;gap:0.5rem">
+    <input type="file" name="archivo" accept=".csv" style="color:var(--muted);font-size:13px">
+    <button type="submit">Importar CSV</button>
+  </form>
+</div>
+<table>
+  <thead>
+    <tr><th>#</th><th>Cliente</th><th>Puntos</th><th>Descuento</th><th>Acciones</th></tr>
+  </thead>
+  <tbody>
+    {% for i in items %}
+    <tr>
+      <td>{{ i.id }}</td>
+      <td>{{ i.cliente }}</td>
+      <td>{{ i.puntos }}</td>
+      <td>{{ i.descuento }}</td>
+      <td style="display:flex;gap:0.5rem">
+        <a href="{{ url_for('editar', id=i.id) }}" class="btn">Editar</a>
+        <a href="{{ url_for('eliminar', id=i.id) }}" class="btn btn-danger">Eliminar</a>
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="5" style="text-align:center;color:var(--muted)">Sin registros</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+

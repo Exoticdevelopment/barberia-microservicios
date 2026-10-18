@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Editar' if item else 'Nueva' }} Sucursal{% endblock %}
+{% block content %}
+<h2>{{ 'Editar Sucursal' if item else 'Nueva Sucursal' }}</h2>
+<form method="post" class="form-card">
+  <label>Nombre</label>
+  <input type="text" name="nombre" value="{{ item.nombre if item else '' }}" required>
+  <label>Dirección</label>
+  <input type="text" name="direccion" value="{{ item.direccion if item else '' }}">
+  <label>Encargado</label>
+  <input type="text" name="encargado" value="{{ item.encargado if item else '' }}">
+  <div class="form-actions">
+    <button type="submit">Guardar</button>
+    <a href="{{ url_for('index') }}" class="btn">Cancelar</a>
+  </div>
+</form>
+{% endblock %}
+

@@ -1,66 +1,116 @@
-version: '3.8'
+# BarberSystem: 12 microservicios Flask + dashboard de gestión.
+# Uso: docker compose up --build   →   dashboard en http://localhost:8000
+
+x-app: &app
+  restart: unless-stopped
+  networks: [barberia-net]
+
+services:
+  app1-clientes:
+    <<: *app
+    build: ./services/app1-clientes
+    ports: ["5001:5001"]
+    volumes: [app1-clientes-data:/app/instance]
+
+  app2-citas:
+    <<: *app
+    build: ./services/app2-citas
+    ports: ["5002:5002"]
+    volumes: [app2-citas-data:/app/instance]
+
+  app3-servicios:
+    <<: *app
+    build: ./services/app3-servicios
+    ports: ["5003:5003"]
+    volumes: [app3-servicios-data:/app/instance]
+
+  app4-barberos:
+    <<: *app
+    build: ./services/app4-barberos
+    ports: ["5004:5004"]
+    volumes: [app4-barberos-data:/app/instance]
+
+  app5-productos:
+    <<: *app
+    build: ./services/app5-productos
+    ports: ["5005:5005"]
+    volumes: [app5-productos-data:/app/instance]
+
+  app6-ventas:
+    <<: *app
+    build: ./services/app6-ventas
+    ports: ["5006:5006"]
+    volumes: [app6-ventas-data:/app/instance]
+
+  app7-proveedores:
+    <<: *app
+    build: ./services/app7-proveedores
+    ports: ["5007:5007"]
+    volumes: [app7-proveedores-data:/app/instance]
+
+  app8-gastos:
+    <<: *app
+    build: ./services/app8-gastos
+    ports: ["5008:5008"]
+    volumes: [app8-gastos-data:/app/instance]
+
+  app9-turnos:
+    <<: *app
+    build: ./services/app9-turnos
+    ports: ["5009:5009"]
+    volumes: [app9-turnos-data:/app/instance]
+
+  app10-reportes:
+    <<: *app
+    build: ./services/app10-reportes
+    ports: ["5010:5010"]
+    volumes: [app10-reportes-data:/app/instance]
+
+  app11-fidelizacion:
+    <<: *app
+    build: ./services/app11-fidelizacion
+    ports: ["5011:5011"]
+    volumes: [app11-fidelizacion-data:/app/instance]
+
+  app12-sucursales:
+    <<: *app
+    build: ./services/app12-sucursales
+    ports: ["5012:5012"]
+    volumes: [app12-sucursales-data:/app/instance]
+
+  gestion:
+    <<: *app
+    build: ./services/gestion
+    ports: ["8000:8000"]
+    environment:
+      PUBLIC_HOST: ${PUBLIC_HOST:-localhost}
+    depends_on:
+      - app1-clientes
+      - app2-citas
+      - app3-servicios
+      - app4-barberos
+      - app5-productos
+      - app6-ventas
+      - app7-proveedores
+      - app8-gastos
+      - app9-turnos
+      - app10-reportes
+      - app11-fidelizacion
+      - app12-sucursales
 
 networks:
   barberia-net:
-    driver: bridge
 
-services:
-
-  # ── DOCKER 1 ──────────────────────
-  app1-clientes:
-    build: ./docker1/app1-clientes
-    ports:
-      - "5001:5001"
-    networks:
-      - barberia-net
-    restart: unless-stopped
-
-  app2-citas:
-    build: ./docker1/app2-citas
-    ports:
-      - "5002:5002"
-    networks:
-      - barberia-net
-    restart: unless-stopped
-
-  app3-servicios:
-    build: ./docker1/app3-servicios
-    ports:
-      - "5003:5003"
-    networks:
-      - barberia-net
-    restart: unless-stopped
-
-  # ── DOCKER 2 ──────────────────────
-  app4-barberos:
-    build: ./docker2/app4-barberos
-    ports:
-      - "5004:5004"
-    networks:
-      - barberia-net
-    restart: unless-stopped
-
-  app5-productos:
-    build: ./docker2/app5-productos
-    ports:
-      - "5005:5005"
-    networks:
-      - barberia-net
-    restart: unless-stopped
-
-  app6-ventas:
-    build: ./docker2/app6-ventas
-    ports:
-      - "5006:5006"
-    networks:
-      - barberia-net
-    restart: unless-stopped
-
-  # ── GESTIÓN CENTRAL ───────────────
-  gestion:
-    build: ./gestion
-    ports:
-      - "8000:8000"
-    networks:
-      - barberia-net
-    restart: unless-stopped
+volumes:
+  app1-clientes-data:
+  app2-citas-data:
+  app3-servicios-data:
+  app4-barberos-data:
+  app5-productos-data:
+  app6-ventas-data:
+  app7-proveedores-data:
+  app8-gastos-data:
+  app9-turnos-data:
+  app10-reportes-data:
+  app11-fidelizacion-data:
+  app12-sucursales-data:

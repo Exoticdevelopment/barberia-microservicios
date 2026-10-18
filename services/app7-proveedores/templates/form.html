@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Editar' if item else 'Nuevo' }} Proveedor{% endblock %}
+{% block content %}
+<h1>{{ 'Editar' if item else 'Nuevo Proveedor' }}</h1>
+<form method="post">
+  <div class="field"><label>Nombre</label><input name="nombre" value="{{ item.nombre if item else '' }}" required></div>
+  <div class="field"><label>Producto</label><input name="producto" value="{{ item.producto if item else '' }}"></div>
+  <div class="field"><label>Contacto</label><input name="contacto" value="{{ item.contacto if item else '' }}"></div>
+  <div class="form-actions">
+    <button type="submit" class="btn">Guardar</button>
+    <a href="{{ url_for('index') }}" class="btn">Cancelar</a>
+  </div>
+</form>
+{% endblock %}
+

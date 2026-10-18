@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Editar' if item else 'Nuevo' }} Turno{% endblock %}
+{% block content %}
+<h2>{{ 'Editar Turno' if item else 'Nuevo Turno' }}</h2>
+<form method="post" class="form-card">
+  <label>Barbero</label>
+  <input type="text" name="barbero" value="{{ item.barbero if item else '' }}" required>
+  <label>Fecha</label>
+  <input type="date" name="fecha" value="{{ item.fecha if item else '' }}">
+  <label>Hora inicio</label>
+  <input type="text" name="hora_inicio" placeholder="08:00" value="{{ item.hora_inicio if item else '' }}">
+  <label>Hora fin</label>
+  <input type="text" name="hora_fin" placeholder="16:00" value="{{ item.hora_fin if item else '' }}">
+  <div class="form-actions">
+    <button type="submit">Guardar</button>
+    <a href="{{ url_for('index') }}" class="btn">Cancelar</a>
+  </div>
+</form>
+{% endblock %}
+

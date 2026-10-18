@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Editar' if item else 'Nuevo' }} Reporte{% endblock %}
+{% block content %}
+<h2>{{ 'Editar Reporte' if item else 'Nuevo Reporte' }}</h2>
+<form method="post" class="form-card">
+  <label>Mes</label>
+  <input type="text" name="mes" placeholder="Ej: Enero 2026" value="{{ item.mes if item else '' }}" required>
+  <label>Total Ventas</label>
+  <input type="number" step="0.01" name="total_ventas" value="{{ item.total_ventas if item else '' }}">
+  <label>Total Gastos</label>
+  <input type="number" step="0.01" name="total_gastos" value="{{ item.total_gastos if item else '' }}">
+  <div class="form-actions">
+    <button type="submit">Guardar</button>
+    <a href="{{ url_for('index') }}" class="btn">Cancelar</a>
+  </div>
+</form>
+{% endblock %}
+

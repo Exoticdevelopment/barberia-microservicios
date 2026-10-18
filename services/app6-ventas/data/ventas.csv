@@ -1,0 +1,6 @@
+id,servicio,monto,metodo_pago,fecha
+1,Corte clásico,25000,Efectivo,2026-10-12
+2,Corte + barba,40000,Nequi,2026-10-12
+3,Fade,30000,Tarjeta,2026-10-13
+4,Afeitado,20000,Efectivo,2026-10-13
+5,Diseño de barba,18000,Daviplata,2026-10-14
